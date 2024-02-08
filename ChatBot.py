@@ -6,7 +6,7 @@ patterns = [
     (r'.*I am (depressed|sad|unhappy).*',
      ['I\'m sorry to hear that. Can you tell me more about what\'s been bothering you?',
       'It\'s important to talk about your feelings. What\'s been on your mind?']),
-    (r'.*I feel (anxious|stressed|worried).*',
+    (r'.*I feel (anxious|stressed|worried|lonely).*',
      ['Anxiety can be tough to deal with. What specifically has been causing you to feel this way?',
       'Let\'s try to work through your feelings of stress together. What\'s been happening?']),
     (r'.*(I hate|I dislike) (myself|life).*',
@@ -16,7 +16,7 @@ patterns = [
      ['I\'m here to help. What do you need advice or assistance with?',
       'You\'re not alone. Feel free to share what\'s been on your mind, and we can work through it together.']),
     (r'.*',
-     ["I see.", "Can you tell me more?", "How does that make you feel?"])  # Default response
+     ["I see.", "Can you tell me more?", "How does that make you feel?", "Is there anyone you cna talk to about this?"])  # Default response
 ]
 
 # Create a chatbot using NLTK's Chat class
