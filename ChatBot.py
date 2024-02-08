@@ -1,36 +1,35 @@
-import random
+import nltk
+from nltk.chat.util import Chat, reflections
 
-# Predefined responses
-responses = {
-    "hi": ["Hello!", "Hi there!", "Hey!"],
-    "how are you": ["I'm doing well, thank you!", "I'm great, thanks for asking!", "All good here, thanks!"],
-    "bye": ["Goodbye!", "See you later!", "Bye! Take care!"],
-    "default": ["Sorry, I didn't understand that.", "I'm not sure what you mean."],
-}
+# Define patterns for the chatbot to recognize and respond to
+patterns = [
+    (r'.*I am (depressed|sad|unhappy).*',
+     ['I\'m sorry to hear that. Can you tell me more about what\'s been bothering you?',
+      'It\'s important to talk about your feelings. What\'s been on your mind?']),
+    (r'.*I feel (anxious|stressed|worried).*',
+     ['Anxiety can be tough to deal with. What specifically has been causing you to feel this way?',
+      'Let\'s try to work through your feelings of stress together. What\'s been happening?']),
+    (r'.*(I hate|I dislike) (myself|life).*',
+     ['It sounds like you\'re going through a tough time. Can you share more about what\'s been going on?',
+      'Remember, it\'s okay to feel this way, but there\'s always hope for things to improve. What\'s been troubling you?']),
+    (r'.*I (need|want) (help|advice).*',
+     ['I\'m here to help. What do you need advice or assistance with?',
+      'You\'re not alone. Feel free to share what\'s been on your mind, and we can work through it together.']),
+    (r'.*',
+     ["I see.", "Can you tell me more?", "How does that make you feel?"])  # Default response
+]
 
-def get_response(user_input):
-    # Convert user input to lowercase for case-insensitive matching
-    user_input = user_input.lower()
-    
-    # Check if user input matches any predefined responses
-    for key in responses:
-        if user_input in key:
-            return random.choice(responses[key])
-    
-    # If no predefined response matches, return a default response
-    return random.choice(responses["default"])
+# Create a chatbot using NLTK's Chat class
+counselor_chatbot = Chat(patterns, reflections)
 
-def main():
-    print("Welcome to the Chatbot!")
-    print("Type 'bye' to exit.")
-    
-    while True:
-        user_input = input("You: ")
-        if user_input.lower() == 'bye':
-            print(get_response(user_input))
-            break
-        else:
-            print("Chatbot:", get_response(user_input))
+# Start a conversation with the chatbot
+print("Counselor Chatbot: Hello, I'm here to listen and offer support. You can share anything with me.")
+print("Counselor Chatbot: If you want to exit, simply type 'exit'.")
 
-if __name__ == "__main__":
-    main()
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == 'exit':
+        print("Counselor Chatbot: Thank you for talking with me. Take care.")
+        break
+    else:
+        print("Counselor Chatbot:", counselor_chatbot.respond(user_input))
